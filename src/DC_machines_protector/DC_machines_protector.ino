@@ -4,6 +4,8 @@
 #include <Encoder.h>
 #include "PMButton.h"
 
+bool developer_mode = 0;
+
 LiquidCrystal_I2C lcd(0x27, 20, 4); 
 Encoder myEnc(2, 3);
 PMButton button1(10);
@@ -26,7 +28,7 @@ float Iupper = 0.8;
 float Vlower = 10.0;
 float Vupper = 14.0;
 
-int inrush_tolerance = 20000;
+int temp_read = 0;
 
 bool btn_clicked_flag = 0;
 
@@ -45,11 +47,40 @@ void setup()
   button1.begin();
     
   button1.debounce(20);
-  button1.dcGap(100);
-  button1.holdTime(1500);
+  button1.dcGap(50);
+  button1.holdTime(2000);
   
   lcd.backlight();
-  lcd.print("Initilising!");
+
+  if(!developer_mode)
+  {
+    lcd.clear();
+    lcd.setCursor(0, 0); //col , row
+    lcd.print(" DC Motor Protector");
+    delay(1000);
+    lcd.clear();
+
+    lcd.setCursor(0, 0); //col , row
+    lcd.print("By Team,");
+    delay(500);
+
+    lcd.setCursor(0, 1); //col , row
+    lcd.print("Nesrin");
+    delay(500);
+
+    lcd.setCursor(0, 2); //col , row
+    lcd.print("Reva");
+    delay(500);
+
+    lcd.setCursor(0, 3); //col , row
+    lcd.print("Anand");
+    delay(1500);
+  }
+
+    lcd.clear();
+    lcd.setCursor(0, 0); //col , row
+    lcd.print("Initilising!");
+    delay(1000);
 
   pinMode(voltage_sensor_pin,   INPUT);
   pinMode(buzzer_pin,           OUTPUT);
@@ -59,13 +90,15 @@ void setup()
   pinMode(dt_pin,               INPUT);
   pinMode(button_pin,           INPUT);
 
-  
-  for(int i=0;i<3;i++)
+  if(!developer_mode)
   {
-  digitalWrite(buzzer_pin,HIGH);
-  delay(100);
-  digitalWrite(buzzer_pin,LOW);
-  delay(80);
+    for(int i=0;i<3;i++)
+    {
+      digitalWrite(buzzer_pin,HIGH);
+      delay(100);
+      digitalWrite(buzzer_pin,LOW);
+      delay(80);
+    }
   }
 
   Serial.println("Calibrating...");
@@ -97,18 +130,29 @@ void loop()
            Serial.println("Inside case 1");
            lcd.clear();
            delay(100);
+           lcd.setCursor(0, 0); //col , row
+           lcd.print("Set-1A");
            lcd.setCursor(0, 1); //col , row
-           lcd.print("Set upper cut off");
+           lcd.print("Set upper cut off I");
            delay(100);
 
            lcd.setCursor(0, 2); //col , row
            lcd.print("I:");
-    
+           lcd.setCursor(2, 2); //col , row
+           lcd.print(Iupper);
+           lcd.blink();
+           delay(1000);
+           
+           temp_read = myEnc.read();
+           
            while(btn_clicked_flag)
-            {
-              Iupper = (myEnc.read()/4)*0.1;
-              lcd.setCursor(2, 2); //col , row
-              lcd.print(Iupper);
+            {              
+              if(myEnc.read() != temp_read)
+              {
+                Iupper = (myEnc.read()/4)*0.1;
+                lcd.setCursor(2, 2); //col , row
+                lcd.print(Iupper);
+              }
 
               if(digitalRead(10)==LOW)
               {
@@ -125,19 +169,29 @@ void loop()
            Serial.println("Inside case 2");
            lcd.clear();
            delay(100);
+           lcd.setCursor(0, 0); //col , row
+           lcd.print("Set-1B");
            lcd.setCursor(0, 1); //col , row
-           lcd.print("Set lower cut off");
+           lcd.print("Set lower cut off I");
            delay(100);
 
            lcd.setCursor(0, 2); //col , row
            lcd.print("I:");
+           
+           lcd.setCursor(2, 2); //col , row
+           lcd.print(Ilower);
+              
+           temp_read = myEnc.read();
     
            while(btn_clicked_flag)
             {
-              Ilower = (myEnc.read()/4)*0.1;
-              lcd.setCursor(2, 2); //col , row
-              lcd.print(Ilower);
-
+              if(myEnc.read() != temp_read)
+              {
+                Ilower = (myEnc.read()/4)*0.1;
+                lcd.setCursor(2, 2); //col , row
+                lcd.print(Ilower);
+              }
+              
               if(digitalRead(10)==LOW)
               {
                btn_clicked_flag = 0;
@@ -153,19 +207,29 @@ void loop()
            Serial.println("Inside case 3");
            lcd.clear();
            delay(100);
+           lcd.setCursor(0, 0); //col , row
+           lcd.print("Set-2A");
            lcd.setCursor(0, 1); //col , row
-           lcd.print("Set upper cut off");
+           lcd.print("Set upper cut off V");
            delay(100);
 
            lcd.setCursor(0, 2); //col , row
            lcd.print("V:");
+
+           lcd.setCursor(2, 2); //col , row
+           lcd.print(Vupper);
+
+           temp_read = myEnc.read(); 
     
            while(btn_clicked_flag)
             {
-              Vupper = (myEnc.read()/4);
-              lcd.setCursor(2, 2); //col , row
-              lcd.print(Vupper);
-
+              if(myEnc.read() != temp_read)
+              {
+                Vupper = (myEnc.read()/4);
+                lcd.setCursor(2, 2); //col , row
+                lcd.print(Vupper);
+              }
+              
               if(digitalRead(10)==LOW)
               {
                btn_clicked_flag = 0;
@@ -181,19 +245,29 @@ void loop()
            Serial.println("Inside case 4");
            lcd.clear();
            delay(100);
+           lcd.setCursor(0, 0); //col , row
+           lcd.print("Set-2B");
            lcd.setCursor(0, 1); //col , row
-           lcd.print("Set lower cut off");
+           lcd.print("Set lower cut off V");
            delay(100);
 
            lcd.setCursor(0, 2); //col , row
            lcd.print("V:");
+
+           lcd.setCursor(2, 2); //col , row
+           lcd.print(Vlower);
+
+           temp_read = myEnc.read();
     
            while(btn_clicked_flag)
             {
-              Vlower = (myEnc.read()/4);
-              lcd.setCursor(2, 2); //col , row
-              lcd.print(Vlower);
-
+              if(myEnc.read() != temp_read)
+              {
+                Vlower = (myEnc.read()/4);
+                lcd.setCursor(2, 2); //col , row
+                lcd.print(Vlower);
+              }
+              
               if(digitalRead(10)==LOW)
               {
                btn_clicked_flag = 0;
@@ -202,7 +276,24 @@ void loop()
                break;
               }
             }
+            lcd.noBlink();
             lcd.clear();
+            delay(500);
+            lcd.blink();
+            lcd.setCursor(6, 1);
+            lcd.print("Settings");
+            lcd.setCursor(7, 2);
+            lcd.print("Saved!");
+
+            delay(500);
+            digitalWrite(buzzer_pin,HIGH);
+            delay(500);
+            digitalWrite(buzzer_pin,LOW); 
+            delay(1500);
+            
+            lcd.noBlink();
+            lcd.clear();
+            settings = 0;
             break;
   
   }
@@ -239,30 +330,45 @@ void loop()
   Serial.print(" | V=");
   Serial.println(V);
 
-  if((I>Iupper || I<Ilower || V>Vupper || V<Vlower) && millis()>inrush_tolerance)
+  if((I>Iupper || I<Ilower || V>Vupper || V<Vlower) && I>0)
   {
     digitalWrite(relay_pin,LOW);
     digitalWrite(buzzer_pin,HIGH);
     delay(500);
     digitalWrite(buzzer_pin,LOW);   
   }
-  
+
+ if(settings>0)
+ {
+  delay(300);
+ }
+ else
+ {
+  delay(600);
+ }
 }
 
 void useButonCheck()
 {
   if(button1.held())
   {
-    Serial.println("button1 was held.");
+      lcd.clear();
+      lcd.setCursor(0, 0); 
+      lcd.print("Restarting...");
+      delay(500);
+      
+      digitalWrite(buzzer_pin,HIGH);
+      delay(500);
+      digitalWrite(buzzer_pin,LOW);
+      digitalWrite(relay_pin,HIGH);
+      lcd.clear();
+  
+      Serial.println("button1 was held.");
   }
   
   if(button1.clicked())
   {
-    settings++;
-    if(settings>4)
-    {
-      settings=0;
-    }
+    settings++; // will reset to zero inside switch(4)
     Serial.print("Settings: ");
     Serial.println(settings);
     
