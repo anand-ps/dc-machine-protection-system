@@ -85,11 +85,6 @@ The system has been validated under various load and fault conditions, demonstra
 ## Project Contributors
 The system was designed and implemented by a cross-functional engineering team:
 
-- **Anand P S**
-    - **Designation**: Systems Engineer
-    - **Bio**: Engineer specializing in distributed backend architectures, embedded systems, and production-grade software design. Builds efficient, fault-tolerant systems with a focus on scalability and long-term maintainability.
-    - **Links**: [LinkedIn](https://www.linkedin.com/in/anand-ps) | [GitHub](https://github.com/anand-ps) | [Email](mailto:anandps.dev@gmail.com)
-
 - **Reva Pradeep**
     - **Designation**: Business & Product Analyst
     - **Bio**: Product-focused professional with experience in business analysis and leading social initiatives. Combines analytical thinking with structured execution to drive outcomes. Brings a leadership mindset with a focus on problem-solving and impact.
@@ -99,3 +94,12 @@ The system was designed and implemented by a cross-functional engineering team:
     - **Designation**: Signal & Data Analytics Developer
     - **Bio**: Electrical and electronics engineer integrating data analytics into system design. Focused on renewable energy, control systems, and signal processing. Driven by hands-on learning and structured problem-solving.
     - **Links**: [LinkedIn](https://www.linkedin.com/in/nesrin-anwer-a7b0b721a) | [GitHub](https://github.com) | [Email](mailto:nesrinanwer999@gmail.com)
+
+- **Anand P S**
+    - **Designation**: Firmware Systems Developer
+    - **Bio**: Engineer specializing in distributed backend architectures, embedded systems, firmware development, and production-grade software design. Builds efficient, fault-tolerant systems with a focus on scalability and long-term maintainability.
+    - **Links**: [LinkedIn](https://www.linkedin.com/in/anand-ps) | [GitHub](https://github.com/anand-ps) | [Email](mailto:anandps.dev@gmail.com)
+
+
+---
+© 2022 Anand P S. All rights reserved.
