@@ -93,7 +93,7 @@ The system was designed and implemented by a cross-functional engineering team:
 - **Nesrin Anwer**
     - **Designation**: Signal & Data Analytics Developer
     - **Bio**: Electrical and electronics engineer integrating data analytics into system design. Focused on renewable energy, control systems, and signal processing. Driven by hands-on learning and structured problem-solving.
-    - **Links**: [LinkedIn](https://www.linkedin.com/in/nesrin-anwer-a7b0b721a) | [GitHub]([https://github.com](https://github.com/NesrinAnwer)) | [Email](mailto:nesrinanwer999@gmail.com)
+    - **Links**: [LinkedIn](https://www.linkedin.com/in/nesrin-anwer-a7b0b721a) | [GitHub](https://github.com/NesrinAnwer) | [Email](mailto:nesrinanwer999@gmail.com)
 
 - **Anand P S**
     - **Designation**: Firmware Systems Developer
