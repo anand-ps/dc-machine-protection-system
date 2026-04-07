@@ -80,7 +80,7 @@ The system provides a clear, high-contrast display for real-time telemetry. The 
 ## Engineering Outcome
 The system has been validated under various load and fault conditions, demonstrating reliable detection of overcurrent and voltage fluctuations. By integrating sensing, logic, and actuation into a single cohesive unit, this project provides a professional-grade safety layer for DC machine operations.
 
-[Explore full details of the Integrated DC Machine Protection and Health Monitoring System](https://anandps.in/projects/dc-machine-protection-system)
+[Explore the complete architecture of the DC Machine Protection System](https://anandps.in/projects/dc-machine-protection-system)
 
 ## Project Contributors
 The system was designed and implemented by a cross-functional engineering team:
